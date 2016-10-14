@@ -3,9 +3,6 @@ highlight NonText guifg=#343434 guibg=#242424
 
 " タブ設定 "
 set guitablabel=%N\ %t%m 
-"colorscheme lucius
-"LuciusDark
-"set background=drak 
 colorscheme solarized
 
 set guioptions-=m 
@@ -17,7 +14,6 @@ if has('win32') || has('win64') || has('win')
 	set shellcmdflag=/c 
 	"set guifont=VL_Gothic_Regular:h12
 	set guifont=Ricty_Regular:h14
-	"set guifont=SourceHanSansJP_Regular:h14
 endif 
 if has('Mac') 
 	set guifont=Osaka-Mono:h14 

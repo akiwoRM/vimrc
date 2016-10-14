@@ -5,7 +5,6 @@
 " インストールプラグイン
 " ・L2R
 " ・listMelProc
-" ・maya2vim
 "
 if has("win32")
 	let &termencoding = &encoding
@@ -403,16 +402,23 @@ command! -nargs=1 -bang -bar -complete=file Rename sav<bang> <args> | call delet
 "endfunction
 "inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " 
+
 " パスを開く "
 function ExplorerStart()
-  let s:dir = expand("%:p:h")
+  let dir = expand("%:p:h")
   if has('win32')
-    let s:directory=substitute(s:dir,"/","\\","g")
-    execute "!start explorer /e,".s:directory
+    let directory=substitute(dir,"/","\\","g")
+    let cmd = "start explorer /e,".directory
   elseif has('mac')
-    execute "!open ".s:dir
+    let cmd = "open ".dir
   elseif has('unix')
-    execute "!nautilus ".s:dir
+    let cmd = "nautilus ".dir
+  endif
+
+  if v:version >= 800
+    let job = job_start(cmd)
+  else
+    execute "!".cmd
   endif
 endfunction
 inoremap <c-e> <ESC>:call ExplorerStart()<CR>
@@ -650,8 +656,26 @@ endif
 " ========================= "
 " airline setting
 " ========================= "
+" powerline用のフォントを使用
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
+" ファイル名のみ表示
+let g:airline_section_c = '%t'
+" syntasticのメッセージを表示しない
+let g:airline#extensions#syntastic#enabled = 0
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'c'  : 'C',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V',
+  \ '' : 'V',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ }
 
 " ネットサービス・パスワード関係 "
 if filereadable("password.vim")
