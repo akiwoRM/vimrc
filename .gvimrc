@@ -3,6 +3,7 @@ highlight NonText guifg=#343434 guibg=#242424
 
 " タブ設定 "
 set guitablabel=%N\ %t%m 
+set background=dark
 colorscheme solarized
 
 set guioptions-=m 

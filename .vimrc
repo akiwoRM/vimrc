@@ -225,7 +225,9 @@ set shortmess+=I
 set noundofile
 " カラー設定 "
 syntax on
-colorscheme slate
+colorscheme solarized
+" customize Solarized theme
+hi SpecialKey guibg=#002b36 
  
 " タブ表示設定 "
 set list
