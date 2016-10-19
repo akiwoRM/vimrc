@@ -42,7 +42,6 @@ NeoBundle 'sakuraiyuta/commentout.vim'
 NeoBundle 'akiwoRM/vim2maya.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'fuenor/im_control.vim'
@@ -417,7 +416,7 @@ function ExplorerStart()
     let cmd = "nautilus ".dir
   endif
 
-  if v:version >= 800
+  if has('job')
     let job = job_start(cmd)
   else
     execute "!".cmd
