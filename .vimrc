@@ -13,40 +13,44 @@ endif
 "ファイルタイプの認識機能オフ"
 filetype off
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+if &compatible
+	set nocomptible
+endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+call dein#begin(expand('~/.vim/dein/'))
 
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-surround'
-NeoBundleLazy 'davidhalter/jedi-vim', {
-\      'autoload': {'filetypes': ['python']}}
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'aperezdc/vim-template'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'jonathanfilip/vim-lucius'
-NeoBundle 'vim-scripts/TwitVim'
-NeoBundle 'vim-scripts/YankRing.vim'
-NeoBundle 'sakuraiyuta/commentout.vim'
-NeoBundle 'akiwoRM/vim2maya.vim'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'fuenor/im_control.vim'
+call dein#add( 'Shougo/vimproc')
+call dein#add( 'Shougo/vimshell')
+call dein#add( 'Shougo/vimfiler')
+call dein#add( 'Shougo/unite.vim')
+call dein#add( 'Shougo/neomru.vim')
+call dein#add( 'Shougo/neocomplete.vim')
+call dein#add( 'thinca/vim-quickrun')
+call dein#add( 'thinca/vim-ref')
+call dein#add( 'scrooloose/nerdtree')
+call dein#add( 'tpope/vim-surround')
+call dein#add( 'davidhalter/jedi-vim')
+"call dein#add( 'davidhalter/jedi-vim', {)
+" \      'autoload': {'filetypes': ['python']}})
+call dein#add( 'majutsushi/tagbar')
+call dein#add( 'aperezdc/vim-template')
+call dein#add( 'sjl/gundo.vim')
+call dein#add( 'Yggdroot/indentLine')
+call dein#add( 'jonathanfilip/vim-lucius')
+call dein#add( 'vim-scripts/TwitVim')
+call dein#add( 'vim-scripts/YankRing.vim')
+call dein#add( 'sakuraiyuta/commentout.vim')
+call dein#add( 'akiwoRM/vim2maya.vim')
+call dein#add( 'altercation/vim-colors-solarized')
+call dein#add( 'scrooloose/syntastic')
+"call dein#add( 'Lokaltog/vim-powerline')
+call dein#add( 'vim-airline/vim-airline')
+call dein#add( 'vim-airline/vim-airline-themes')
+call dein#add( 'fuenor/im_control.vim')
 
-call neobundle#end()
+call dein#end()
 
 "追加のプラグインパス "
 set runtimepath+=$HOME/vimfiles
@@ -267,10 +271,11 @@ EOT
 endfunction
 " }}}
 
-let s:hooks = neobundle#get_hooks("jedi-vim")
-function! s:hooks.on_source(bundle)
+function! s:addPythonPath() abort
     call s:set_python_path()
 endfunction
+
+call dein#set_hook('jedi-vim', 'hook_source', function('s:addPythonPath'))
 
 " ファイルタイプによる辞書補完"
 if has('autocmd')
@@ -650,9 +655,6 @@ let g:syntastic_python_flake8_args = '--ignore="E221,E241,E271,E501"'
 " :RopeRename
 " :RopeExtractMethod 
 " :RopeUndo
-if has('unix') 
-	NeoBundleCheck
-endif
 
 " ========================= "
 " airline setting
