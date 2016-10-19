@@ -73,3 +73,6 @@ repo = 'vim-airline/vim-airline-themes'
 [[plugins]]
 repo = 'fuenor/im_control.vim'
 
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
+
