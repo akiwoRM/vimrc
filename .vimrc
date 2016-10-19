@@ -17,40 +17,26 @@ if &compatible
 	set nocomptible
 endif
 
+let s:dein_dir = expand('~/.vim/dein/')
+
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-call dein#begin(expand('~/.vim/dein/'))
+if dein#load_state(s:dein_dir)
+	call dein#begin(s:dein_dir)
 
-call dein#add( 'Shougo/vimproc')
-call dein#add( 'Shougo/vimshell')
-call dein#add( 'Shougo/vimfiler')
-call dein#add( 'Shougo/unite.vim')
-call dein#add( 'Shougo/neomru.vim')
-call dein#add( 'Shougo/neocomplete.vim')
-call dein#add( 'thinca/vim-quickrun')
-call dein#add( 'thinca/vim-ref')
-call dein#add( 'scrooloose/nerdtree')
-call dein#add( 'tpope/vim-surround')
-call dein#add( 'davidhalter/jedi-vim')
-"call dein#add( 'davidhalter/jedi-vim', {)
-" \      'autoload': {'filetypes': ['python']}})
-call dein#add( 'majutsushi/tagbar')
-call dein#add( 'aperezdc/vim-template')
-call dein#add( 'sjl/gundo.vim')
-call dein#add( 'Yggdroot/indentLine')
-call dein#add( 'jonathanfilip/vim-lucius')
-call dein#add( 'vim-scripts/TwitVim')
-call dein#add( 'vim-scripts/YankRing.vim')
-call dein#add( 'sakuraiyuta/commentout.vim')
-call dein#add( 'akiwoRM/vim2maya.vim')
-call dein#add( 'altercation/vim-colors-solarized')
-call dein#add( 'scrooloose/syntastic')
-"call dein#add( 'Lokaltog/vim-powerline')
-call dein#add( 'vim-airline/vim-airline')
-call dein#add( 'vim-airline/vim-airline-themes')
-call dein#add( 'fuenor/im_control.vim')
+	let s:toml      = '~/.dein.toml'
+	let s:lazy_toml = '~/.dein_lazy.toml'
+	call dein#load_toml(s:toml, {'lazy':0})
+	call dein#load_toml(s:lazy_toml, {'lazy':1})
 
-call dein#end()
+	call dein#end()
+	call dein#save_state()
+endif
+
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+	call dein#install()
+endif
 
 "追加のプラグインパス "
 set runtimepath+=$HOME/vimfiles
