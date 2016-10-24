@@ -304,10 +304,13 @@ nnoremap ce c$
 nnoremap <tab> %
 vnoremap <tab> %
 " ブランケット
-inoremap ( ()<LEFT>
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap < <><LEFT>
+" doorboy.vimに移行
+"inoremap ( ()<LEFT>
+"inoremap { {}<LEFT>
+"inoremap [ []<LEFT>
+"inoremap < <><LEFT>
+"inoremap ' ''<LEFT>
+"inoremap " ""<LEFT>
 " 上書き保存
 nmap <c-s> <ESC>:w!<CR>
 " 練習

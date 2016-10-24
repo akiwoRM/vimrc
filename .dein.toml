@@ -76,3 +76,6 @@ repo = 'fuenor/im_control.vim'
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
 
+[[plugins]]
+repo = 'itmammoth/doorboy.vim'
+
